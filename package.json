@@ -4,7 +4,13 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint \"**/*.ts*\" --ignore-pattern node_modules/",
+    "lint-fix": "eslint \"**/*.ts*\" --fix --ignore-pattern node_modules/",
+    "style": "prettier --check \"src/**/*.ts*\"",
+    "style-fix": "prettier --write --ignore-unknown",
+    "check": "npm run lint && npm run style",
+    "fix": "npm run lint-fix && npm run style-fix"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.0",
@@ -17,10 +23,24 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "npm run check"
+    }
+  },
   "devDependencies": {
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.1.0",
     "typescript": "4.0.5"
   },
   "license": "MIT"
